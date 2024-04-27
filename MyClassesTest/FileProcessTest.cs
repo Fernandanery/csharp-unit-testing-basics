@@ -36,7 +36,6 @@ namespace MyClassesTest
         }
 
         // Anotações: Após a finalização do método TestInitialize inica o processo do TestCleanup
-
         [TestCleanup]
         public void TestCleanup()
         {

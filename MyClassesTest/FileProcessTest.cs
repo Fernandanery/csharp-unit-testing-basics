@@ -76,6 +76,7 @@ namespace MyClassesTest
             //File.Delete(_GoodFileName);
 
             Assert.IsTrue(fromCall);
+            //Assert.IsFalse(fromCall);
         }
 
         public void SetGoodFileName()
@@ -86,8 +87,15 @@ namespace MyClassesTest
             {
                 _GoodFileName = _GoodFileName.Replace("[AppPath]", Environment.GetFolderPath
                                                                    (Environment.SpecialFolder.ApplicationData));
-
             }
+        }
+
+        // Anotação: Pode ser utilizado como teste de performace
+        [TestMethod]
+        [Timeout(3100)]
+        public void SimulateTimout()
+        {
+            System.Threading.Thread.Sleep(3000);
         }
 
         [TestMethod]

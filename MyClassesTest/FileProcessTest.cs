@@ -13,6 +13,48 @@ namespace MyClassesTest
         private string _GoodFileName;
         public TestContext TestContext { get; set; }
 
+        #region Test Initialize e Cleanup
+
+        // Esses testes é orientado para ser executado apenas local, para realizar no servidor deve ser efetuado na camada assembly (dll)
+        // Anotações: Quando pedir para rodar o teste FileNameDoesExists o método TestInitialize será executado antes
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            if (TestContext.TestName == "FileNameDoesExists")
+            {
+                if (!string.IsNullOrEmpty(_GoodFileName))
+                {
+                    SetGoodFileName();
+                    TestContext.WriteLine($"Creating File: {_GoodFileName}"); 
+                    File.AppendAllText(_GoodFileName, "Some text");
+
+                }
+
+            }
+
+        }
+
+        // Anotações: Após a finalização do método TestInitialize inica o processo do TestCleanup
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            if (TestContext.TestName == "FileNameDoesExists")
+            {
+                if (!string.IsNullOrEmpty(_GoodFileName))
+                {
+                    TestContext.WriteLine($"Deleting File: {_GoodFileName}");
+                    File.Delete(_GoodFileName);
+
+                }
+
+            }
+
+        }
+
+        #endregion
+
 
         [TestMethod]
         public void FileNameDoesExists()
@@ -20,15 +62,16 @@ namespace MyClassesTest
             FileProcess fp = new FileProcess();
             bool fromCall;
 
-            SetGoodFileName();
-            TestContext.WriteLine($"Creating File: {_GoodFileName}"); //Mosta o step do teste no output
-            File.AppendAllText(_GoodFileName, "Some text");
+            //SetGoodFileName();
+
+            //TestContext.WriteLine($"Creating File: {_GoodFileName}"); //Mostra o step do teste no output
+            //File.AppendAllText(_GoodFileName, "Some text");
+
             TestContext.WriteLine($"Testing File: {_GoodFileName}");
             fromCall = fp.FileExists(_GoodFileName);
-            TestContext.WriteLine($"Deleting File: {_GoodFileName}");
 
-
-            File.Delete(_GoodFileName);
+            //TestContext.WriteLine($"Deleting File: {_GoodFileName}");
+            //File.Delete(_GoodFileName);
 
             Assert.IsTrue(fromCall);
         }

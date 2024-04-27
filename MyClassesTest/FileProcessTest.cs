@@ -26,7 +26,7 @@ namespace MyClassesTest
                 if (!string.IsNullOrEmpty(_GoodFileName))
                 {
                     SetGoodFileName();
-                    TestContext.WriteLine($"Creating File: {_GoodFileName}"); 
+                    TestContext.WriteLine($"Creating File: {_GoodFileName}");
                     File.AppendAllText(_GoodFileName, "Some text");
 
                 }
@@ -57,12 +57,14 @@ namespace MyClassesTest
 
 
         [TestMethod]
+        [Description("Check to see if a file does exist.")]
+        [Owner("Fernanda")]
         public void FileNameDoesExists()
         {
             FileProcess fp = new FileProcess();
             bool fromCall;
 
-            //SetGoodFileName();
+            SetGoodFileName();
 
             //TestContext.WriteLine($"Creating File: {_GoodFileName}"); //Mostra o step do teste no output
             //File.AppendAllText(_GoodFileName, "Some text");
@@ -84,11 +86,13 @@ namespace MyClassesTest
             {
                 _GoodFileName = _GoodFileName.Replace("[AppPath]", Environment.GetFolderPath
                                                                    (Environment.SpecialFolder.ApplicationData));
-                    
+
             }
         }
 
         [TestMethod]
+        [Description("Check to see if a file does not exist.")]
+        [Owner("Fernanda")]
         public void FileNameDoesNotExists()
         {
             FileProcess fp = new FileProcess();
@@ -101,6 +105,7 @@ namespace MyClassesTest
         // Teste para excessão
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
+        [Owner("Fernanda")]
         public void FileNameNullOrEmpty_ThrowsArgumentNullException()
         {
             FileProcess fp = new FileProcess();
@@ -112,6 +117,7 @@ namespace MyClassesTest
 
         // Teste para excessão
         [TestMethod]
+        [Owner("Fernanda")]
         public void FileNameNullOrEmpty_ThrowsArgumentNullException_UsingTryCatch()
         {
             FileProcess fp = new FileProcess();

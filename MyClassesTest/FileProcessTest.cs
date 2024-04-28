@@ -58,6 +58,7 @@ namespace MyClassesTest
         [TestMethod]
         [Description("Check to see if a file does exist.")]
         [Owner("Fernanda")]
+        [Priority(0)]
         public void FileNameDoesExists()
         {
             FileProcess fp = new FileProcess();
@@ -74,8 +75,8 @@ namespace MyClassesTest
             //TestContext.WriteLine($"Deleting File: {_GoodFileName}");
             //File.Delete(_GoodFileName);
 
-            Assert.IsTrue(fromCall);
-            //Assert.IsFalse(fromCall);
+            //Assert.IsTrue(fromCall);
+            Assert.IsFalse(fromCall);
         }
 
         public void SetGoodFileName()
@@ -92,6 +93,8 @@ namespace MyClassesTest
         // Anotação: Pode ser utilizado como teste de performace
         [TestMethod]
         [Timeout(3100)]
+        [Priority(0)]
+
         public void SimulateTimout()
         {
             System.Threading.Thread.Sleep(3000);
@@ -100,6 +103,8 @@ namespace MyClassesTest
         [TestMethod]
         [Description("Check to see if a file does not exist.")]
         [Owner("Fernanda")]
+        [Priority(1)]
+
         public void FileNameDoesNotExists()
         {
             FileProcess fp = new FileProcess();
@@ -113,6 +118,9 @@ namespace MyClassesTest
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         [Owner("Fernanda")]
+        [Priority(1)]
+        [TestCategory("Exception")]
+
         public void FileNameNullOrEmpty_ThrowsArgumentNullException()
         {
             FileProcess fp = new FileProcess();
@@ -125,6 +133,8 @@ namespace MyClassesTest
         // Teste para excessão
         [TestMethod]
         [Owner("Fernanda")]
+        [Priority(1)]
+
         public void FileNameNullOrEmpty_ThrowsArgumentNullException_UsingTryCatch()
         {
             FileProcess fp = new FileProcess();

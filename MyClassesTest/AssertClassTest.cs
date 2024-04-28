@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using MyClasses;
 
 namespace MyClassesTest
 {
     [TestClass]
     public class AssertClassTest
     {
+        #region
         [TestMethod]
         [Owner("FernandaN")]
         // Anotações: Metodo de teste que compara as strings, se tiver algo de diferente entra as duas retorna erro
@@ -38,7 +40,29 @@ namespace MyClassesTest
 
             Assert.AreNotEqual(str1, srt2);
         }
+        #endregion
 
+        #region
+        [TestMethod]
+        public void AreSameTest()
+        {
+            FileProcess x = new FileProcess();
+            FileProcess y = x;
+
+            Assert.AreSame(x, y);
+        }
+        
+        [TestMethod]
+        public void AreNotSame()
+        {
+            FileProcess x = new FileProcess();
+            FileProcess y = new FileProcess();
+
+            Assert.AreNotSame(x, y);
+        }
+
+
+        #endregion
 
     }
 }

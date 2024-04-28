@@ -93,7 +93,6 @@ namespace MyClassesTest
 
         }
 
-
         #endregion
 
     }

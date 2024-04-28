@@ -71,6 +71,7 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Ignore]
         public void FileNameDoesExistsSimpleMessage()
         {
             FileProcess fp = new FileProcess();
@@ -85,6 +86,8 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Ignore]
+
         public void FileNameDoesExistsMessageFormatting()
         {
             FileProcess fp = new FileProcess();

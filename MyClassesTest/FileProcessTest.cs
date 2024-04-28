@@ -21,7 +21,7 @@ namespace MyClassesTest
         [TestInitialize]
         public void TestInitialize()
         {
-            if (TestContext.TestName == "FileNameDoesExists")
+            if (TestContext.TestName.StartsWith("FileNameDoesExists"))
             {
                 if (!string.IsNullOrEmpty(_GoodFileName))
                 {
@@ -39,17 +39,15 @@ namespace MyClassesTest
         [TestCleanup]
         public void TestCleanup()
         {
-            if (TestContext.TestName == "FileNameDoesExists")
+            if (TestContext.TestName.StartsWith("FileNameDoesExists"))
             {
                 if (!string.IsNullOrEmpty(_GoodFileName))
                 {
                     TestContext.WriteLine($"Deleting File: {_GoodFileName}");
-                    File.Delete(_GoodFileName);
+                    //File.Delete(_GoodFileName);
 
                 }
-
             }
-
         }
 
         #endregion
@@ -66,17 +64,39 @@ namespace MyClassesTest
 
             SetGoodFileName();
 
-            //TestContext.WriteLine($"Creating File: {_GoodFileName}"); //Mostra o step do teste no output
-            //File.AppendAllText(_GoodFileName, "Some text");
+            TestContext.WriteLine($"Testing File: {_GoodFileName}");
+            fromCall = fp.FileExists(_GoodFileName);
+
+            Assert.IsTrue(fromCall);
+        }
+
+        [TestMethod]
+        public void FileNameDoesExistsSimpleMessage()
+        {
+            FileProcess fp = new FileProcess();
+            bool fromCall;
+
+            SetGoodFileName();
 
             TestContext.WriteLine($"Testing File: {_GoodFileName}");
             fromCall = fp.FileExists(_GoodFileName);
 
-            //TestContext.WriteLine($"Deleting File: {_GoodFileName}");
-            //File.Delete(_GoodFileName);
+            Assert.IsFalse(fromCall, "File Does NOT Exists");
+        }
 
-            //Assert.IsTrue(fromCall);
-            Assert.IsFalse(fromCall);
+        [TestMethod]
+        public void FileNameDoesExistsMessageFormatting()
+        {
+            FileProcess fp = new FileProcess();
+            bool fromCall;
+
+            SetGoodFileName();
+
+            TestContext.WriteLine($"Testing File: {_GoodFileName}");
+            fromCall = fp.FileExists(_GoodFileName);
+
+            // Anotação: Mostra o caminho no qual deu erro
+            Assert.IsFalse(fromCall, "File {0} Does NOT Exists.", _GoodFileName);
         }
 
         public void SetGoodFileName()

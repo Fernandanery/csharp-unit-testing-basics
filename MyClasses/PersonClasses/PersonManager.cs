@@ -1,4 +1,7 @@
-﻿namespace MyClasses.PersonClasses
+﻿using System;
+using System.Collections.Generic;
+
+namespace MyClasses.PersonClasses
 {
     public class PersonManager
     {
@@ -12,15 +15,43 @@
                 {
                     ret = new Supervisor();
                 }
-                else                
+                else
                     ret = new Employee();
 
                 ret.FirstName = first;
                 ret.LastName = last;
-                
+
             }
 
             return ret;
+
+        }
+
+        public List<Person> GetPeople()
+        {
+            List<Person> people = new List<Person>();
+
+            people.Add(new Person()
+            {
+                FirstName = "Fernanda",
+                LastName = "Nery"
+            });
+
+            people.Add(new Person()
+            {
+                FirstName = "Laura",
+                LastName = "Antonia"
+
+            });
+
+            people.Add(new Person()
+            {
+                FirstName = "Thiago",
+                LastName = "Jose"
+
+            });
+
+            return people;
 
         }
     }

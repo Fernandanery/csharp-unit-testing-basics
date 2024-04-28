@@ -1,12 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MyClasses;
+using MyClasses.PersonClasses;
 
 namespace MyClassesTest
 {
     [TestClass]
     public class AssertClassTest
     {
-        #region
+        #region AreEqualTest|AreNotEqualTest
         [TestMethod]
         [Owner("FernandaN")]
         // Anotações: Metodo de teste que compara as strings, se tiver algo de diferente entra as duas retorna erro
@@ -42,7 +43,7 @@ namespace MyClassesTest
         }
         #endregion
 
-        #region
+        #region AreSameTest | AreNotSameTest
         [TestMethod]
         public void AreSameTest()
         {
@@ -53,12 +54,43 @@ namespace MyClassesTest
         }
         
         [TestMethod]
-        public void AreNotSame()
+        public void AreNotSameTest()
         {
             FileProcess x = new FileProcess();
             FileProcess y = new FileProcess();
 
             Assert.AreNotSame(x, y);
+        }
+
+
+        #endregion
+
+        #region IsInstanceOfType
+
+        [TestMethod]
+        [Owner("FernandaN")]
+        public void IsInstaceOfTypeTest()
+        {
+            PersonManager mrg = new PersonManager();
+            Person per;
+
+            per = mrg.CreatePerson("Fernanda", "Nery", true);
+
+            Assert.IsInstanceOfType(per, typeof(Supervisor));
+
+        }
+
+        [TestMethod]
+        [Owner("FernandaN")]
+        public void IsNullTest()
+        {
+            PersonManager mrg = new PersonManager();
+            Person per;
+
+            per = mrg.CreatePerson("", "Nery", true);
+
+            Assert.IsNull(per);
+
         }
 
 

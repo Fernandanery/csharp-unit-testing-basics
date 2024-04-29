@@ -1,0 +1,16 @@
+CREATE TABLE FileProcessTest
+(
+    FileName varchar(255) NULL,
+    ExpectedValue BIT(1) NOT NULL,
+    CausesException BIT(1) NOT NULL
+);
+
+
+INSERT INTO FileProcessTest
+VALUES ('C:\Windows\Regedit.ext', 1, 0);
+
+INSERT INTO FileProcessTest
+VALUES ('C:\NotExists.txt', 0, 0);
+
+INSERT INTO FileProcessTest
+VALUES (null, 0, 1);

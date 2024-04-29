@@ -71,6 +71,42 @@ namespace MyClassesTest
         }
 
         [TestMethod]
+        [Owner("FernandaN")]
+        [DataSource("MySql.Data.MySqlClient",
+            "Server=localhost;DataBase=unit-test;Uid=root;Pwd=123456", "FileProcessTest", DataAccessMethod.Sequential)]
+        [Ignore]
+        public void FileExistsTestFromDB()
+        {
+            //Anotãções: Crio a classe que eu quero testar
+            FileProcess fp = new FileProcess();
+            string fileName;
+
+            //Anotações: Criando os tres campos
+            bool expectedValue, causesException, fromCall;
+ 
+            //Anotações: Preencho o fileName que esta no banco de dados
+            fileName = TestContext.DataRow["FileName"].ToString();
+
+            //Anotações: Preencho o expectedValue que está no banco de dados para um registro especifico
+            expectedValue = Convert.ToBoolean(TestContext.DataRow["ExpectedValue"]);
+
+            //Anotações: A causa da excessão
+            causesException = Convert.ToBoolean(TestContext.DataRow["CausesException"]);
+
+            try
+            {
+                fromCall = fp.FileExists(fileName);
+                Assert.AreEqual(expectedValue, fromCall,
+                    $"File: {fileName} has failed. METHOD: FileExistsTestFromDB");
+            }
+            catch (ArgumentException)
+            {
+
+                Assert.IsTrue(causesException);
+            }
+        }
+
+        [TestMethod]
         [Ignore]
         public void FileNameDoesExistsSimpleMessage()
         {
